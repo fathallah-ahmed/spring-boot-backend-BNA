@@ -1,4 +1,4 @@
-package resource;
+package tn.bna_backend.resource;
 
 import jakarta.validation.Valid;
 import lombok.Builder;
@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tn.bna_backend.domain.User;
+import tn.bna_backend.domain.HttpResponse;
 import tn.bna_backend.dto.UserDTO;
 import tn.bna_backend.service.UserService;
 
 import java.net.URI;
-import java.net.http.HttpResponse;
 import java.util.Map;
+
 
 import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -26,8 +27,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RequestMapping(path="/user")
 @RequiredArgsConstructor
 
-@Builder
-@SuperBuilder
+
 public class UserResource {
     private final UserService userService;
 
@@ -41,7 +41,8 @@ public class UserResource {
                         .message("User created")
                         .status(CREATED)
                         .statusCode(CREATED.value())
-                        .build()); }
+                        .build());
+    }
 
 
     private URI getUri() {

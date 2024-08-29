@@ -14,6 +14,7 @@ public class RoleRowMapper implements RowMapper<Role> {
         return Role.builder()
                 .id(resaultSet.getLong("id"))
                 .name(resaultSet.getString("name"))
-                .permission(resaultSet.getString("permission")).build();
+                .permission(resaultSet.getString("permission")
+                ).build();
     }
 }

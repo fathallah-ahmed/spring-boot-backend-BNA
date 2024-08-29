@@ -46,20 +46,22 @@ public class userRepositoryImpl<T extends User> implements userRepository<T> {
         try {
             KeyHolder holder = new GeneratedKeyHolder();
             SqlParameterSource parameters = getSqlParameterSource(user);
+
             jdbc.update(INSERT_USER_QUERY, parameters, holder);
             user.setId(requireNonNull(holder.getKey()).longValue());
-            roleRepository.addRoleToUser(user.getId(), ROLE_USER.name());
-        String verificationUrl = getVerificationUrl(UUID.randomUUID().toString(),ACCOUNT.getType());
-        jdbc.update(INSERT_ACCOUNT_VERIFICATION_URL_QUERY ,Map.of("userId()",user.getId(),"url",verificationUrl));
+          //  roleRepository.addRoleToUser(user.getId(), ROLE_USER.name());
+        //String verificationUrl = getVerificationUrl(UUID.randomUUID().toString(),ACCOUNT.getType());
+       // jdbc.update(INSERT_ACCOUNT_VERIFICATION_URL_QUERY ,Map.of("userId()",user.getId(),"url",verificationUrl));
         //emailService.sendVerificationUrl(user.getFirstName(),user.getEmail(),verificationUrl,ACCOUNT);
-        user.setEnabled(false);
-        user.setNotLocked(true);
+       // user.setEnabled(false);
+       // user.setNotLocked(true);
 
         return user;
         }
 
-        catch (Exception exception) {
-            log.error(exception.getMessage());
+        catch (Exception e) {
+            // Log the exception and rethrow as ApiException
+            log.error("Error creating user", e);
             throw new ApiException("An error occurred. Please try again.");
         }
     }

@@ -22,7 +22,7 @@ import static tn.bna_backend.query.RoleQuery.SELECT_ROLE_BY_NAME_QUERY;
 @Repository
 @Slf4j
 @RequiredArgsConstructor
-public class RoleRepositoryImpl implements RoleRepository<Role> {
+public class    RoleRepositoryImpl implements RoleRepository<Role> {
 
     private final NamedParameterJdbcTemplate jdbc;
     @Override

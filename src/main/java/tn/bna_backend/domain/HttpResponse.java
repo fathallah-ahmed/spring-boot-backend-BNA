@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import java.util.Map;
 
 @Data
-@SuperBuilder
+
 @NoArgsConstructor
+@SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class HttpResponse {
     protected String timeStamp;
