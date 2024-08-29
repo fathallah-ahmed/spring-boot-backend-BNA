@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/stage
-    password: root
-    username:
+    url: jdbc:mysql://127.0.0.1:3306/stage
+    password:
+    username: root
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL8InnoDBDialect
     generate-ddl: true
@@ -16,4 +17,6 @@ spring:
         format_sql: true
   sql:
     init:
-      mode: never
+      mode: always
+      continue-on-error: false
+
