@@ -9,15 +9,14 @@ import tn.bna_backend.domain.Role;
 import tn.bna_backend.exception.ApiException;
 import tn.bna_backend.repository.RoleRepository;
 import tn.bna_backend.rowmapper.RoleRowMapper;
-
+import static java.util.Map.of;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import static tn.bna_backend.enumeration.RoleType.ROLE_USER;
-import static tn.bna_backend.query.RoleQuery.INSERT_ROLE_TO_USER_QUERY;
-import static tn.bna_backend.query.RoleQuery.SELECT_ROLE_BY_NAME_QUERY;
+import static tn.bna_backend.query.RoleQuery.*;
 
 @Repository
 @Slf4j
@@ -68,8 +67,19 @@ public class    RoleRepositoryImpl implements RoleRepository<Role> {
 
     @Override
     public Role getRoleByUserId(Long userId) {
-        return null;
+        log.info("Fetching role for user id: {}", userId);
+        try {Role result = jdbc.queryForObject(SELECT_ROLE_BY_ID_QUERY, of("id", userId), new RoleRowMapper());
+            System.out.print(result);
+            return result;
+
+        } catch (EmptyResultDataAccessException exception) {
+            throw new ApiException("No role found by name: " + ROLE_USER.name());
+        } catch (Exception exception) {
+            log.error(exception.getMessage());
+            throw new ApiException("An error occurred. Please try again.");
+        }
     }
+
 
     @Override
     public Role getRoleByUserEmail(String email) {

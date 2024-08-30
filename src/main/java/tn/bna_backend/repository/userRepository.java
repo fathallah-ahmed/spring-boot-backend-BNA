@@ -14,4 +14,6 @@ public interface userRepository <T extends User>{
     T get(Long id);
     T update(T data);
     Boolean delete(Long id);
+
+    User getUserByEmail(String email);
 }
